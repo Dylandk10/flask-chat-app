@@ -1,0 +1,1 @@
+2023-07-27 14:00:30.774332: (1406, "Data too long for column 'name' at row 1")2023-07-27 14:12:11.200526: (1406, "Data too long for column 'name' at row 1")
