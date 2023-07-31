@@ -5,10 +5,17 @@ socket.on('connect', function() {
 });
 
 document.getElementById('sendText').addEventListener("click", () => {
-    socket.emit('chat', {data: "Here is message"});
+    let input = document.getElementById('input');
+    let list = document.getElementById('textList');
+    let childEle = document.createElement("li");
+    childEle.textContent = input.value;
+    list.appendChild(childEle);
+    socket.emit('chat', {data: input.value});
+    input.value = "";
 });
 
 
 socket.on('chat', (data) => {
-    console.log(data);
+    let jsonData = JSON.parse(data)
+    console.log(jsonData.data);
 });

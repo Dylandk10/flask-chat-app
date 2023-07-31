@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template
 from flask_mysqldb import MySQL
 from flask_socketio import SocketIO
-import json
 
 from DB.database_handler import Database
 from user import User
@@ -42,17 +41,18 @@ def home():
 
 #receive the chat ont he event chat
 @socketio.on('chat')
-def handle_my_custom_event(json):
-    app.logger.error('received json: ' + str(json))
-    data = '{"data": "This is new"}'
-    socketio.emit('chat', data)
+def handle_my_custom_event(jsonData):
+   
+   app.logger.error('received json chat: ' + str(jsonData['data']))
+   data = '{"data": "This is new"}'
+   socketio.emit('chat', data)
 
 
 @socketio.on('connection-made')
-def handle_connect(json):
-    app.logger.error('received json: ' + str(json))
+def handle_connect(jsonData):
+    app.logger.error('received json: ' + str(jsonData))
     data = '{"data": "Connection made}'
-    socketio.emit('connection-made', data)
+    socketio.emit('connection-made', data);
 
 if __name__ == '__main__':
     socketio.run(app.run(debug=True))
